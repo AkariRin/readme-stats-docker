@@ -37,3 +37,8 @@ Make sure you have docker installed on your system
    ```sh
    docker-compose down
    ```
+
+### Usage
+Visit `localhost:9000` in browser to get stats card.
+
+For further guide, visit README of [github-readme-stats](https://github.com/anuraghazra/github-readme-stats)
