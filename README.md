@@ -26,14 +26,14 @@ Make sure you have docker installed on your system
 4. Set the port exposed to host (Optional)
    ```yaml
    ports:
-   	 - 9000:9000
+   - 9000:9000
    ```
    
 5. Run the container
    ```sh
    docker-compose up -d
    ```
-Stop the container
-```sh
-docker-compose down
-```
+   Stop the container
+   ```sh
+   docker-compose down
+   ```
