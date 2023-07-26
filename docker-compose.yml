@@ -1,0 +1,7 @@
+services:
+  app:
+    image: akaririn/readme-stats-docker
+    ports:
+      - 9000:9000
+    environment:
+      - PAT_1=YOUR_GITHUB_ACCESS_TOKEN
