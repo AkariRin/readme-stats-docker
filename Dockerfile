@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:alpine
 COPY github-readme-stats /app
 WORKDIR /app
 RUN npm i && npm i express
