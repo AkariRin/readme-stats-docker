@@ -1,0 +1,8 @@
+**/*.md
+**/*.gitignore
+github-readme-stats/LICENSE
+github-readme-stats/.github
+github-readme-stats/.git
+github-readme-stats/.husky
+github-readme-stats/.vscode
+github-readme-stats/powered-by-vercel.svg
