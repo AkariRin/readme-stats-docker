@@ -23,13 +23,8 @@ Make sure you have docker installed on your system
    ```yaml
    - PAT_1=YOUR_GITHUB_ACCESS_TOKEN
    ```
-4. Set the port exposed to host (Optional)
-   ```yaml
-   ports:
-   - 9000:9000
-   ```
    
-5. Run the container
+4. Run the container
    ```sh
    docker-compose up -d
    ```

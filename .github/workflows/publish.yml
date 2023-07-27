@@ -1,13 +1,21 @@
-name: Build
+name: Build docker image and publish
 
 on:
   schedule:
     - cron: '0 0 * * *'
   push:
     branches: master
+  pull_request:
+    branches: master
+
+env:
+  DOCKER_HUB_USER: akaririn
+  # 这里的image name不要加用户名前缀
+  # 例如user/image，这里只取image
+  IMAGE_NAME: readme-stats-docker
 
 jobs:
-  build:
+  docker-build:
 
     runs-on: ubuntu-latest
     permissions:
@@ -16,33 +24,36 @@ jobs:
       id-token: write
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Checkout Source repo
+      - name: Checkout source code
         uses: actions/checkout@v3
         with:
           repository: anuraghazra/github-readme-stats
           path: github-readme-stats
 
-      - name: Setup Docker buildx
-        uses: docker/setup-buildx-action@v2
-
-      - name: Log into Docker Hub
-        if: github.event_name != 'pull_request'
-        uses: docker/login-action@v2
-        with:
-          username: akaririn
-          password: ${{ secrets.DOCKER_HUB_TOKEN }}
-
-      - name: Extract Docker metadata
+      - name: Docker meta
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: akaririn/readme-stats-docker
+          images: ${{ env.DOCKER_HUB_USER }}/${{ env.IMAGE_NAME }}
+          tags: latest
 
-      - name: Build and push Docker image
-        id: build-and-push
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+          
+      - name: Setup Docker buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Login to Docker Hub
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v2
+        with:
+          username: ${{ env.DOCKER_HUB_USER }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+
+      - name: Build and push
         uses: docker/build-push-action@v4
         with:
           context: .

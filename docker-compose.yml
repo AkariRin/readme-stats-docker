@@ -1,7 +1,5 @@
 services:
   app:
-    # using nightly tag means pulling latest scheduled build image from master branch of source repo
-    image: akaririn/readme-stats-docker:nightly
     ports:
       - 9000:9000
     environment:
